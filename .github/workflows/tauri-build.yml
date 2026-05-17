@@ -1,5 +1,8 @@
 name: 🚀 Tauri Build
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   push:
     branches: [main]
@@ -42,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: file-visual-manager-macos
-          path: ${{ steps.tauri_build_macos.outputs.artifactPaths }}
+          path: src-tauri/target/release/bundle/dmg/*.dmg
           if-no-files-found: error
 
       - name: 🧾 上传 macOS 打包诊断文件
@@ -93,7 +96,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: file-visual-manager-windows
-          path: ${{ steps.tauri_build_windows.outputs.artifactPaths }}
+          path: src-tauri/target/release/bundle/nsis/*.exe
           if-no-files-found: error
 
       - name: 🧾 上传 Windows 打包诊断文件
